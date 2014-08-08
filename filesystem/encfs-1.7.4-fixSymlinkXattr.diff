@@ -1,0 +1,65 @@
+diff --git a/encfs/encfs.cpp b/encfs/encfs.cpp
+index dac15bd..41914fe 100644
+--- a/encfs/encfs.cpp
++++ b/encfs/encfs.cpp
+@@ -707,7 +707,7 @@ int _do_setxattr(EncFS_Context *, const string &cyName,
+ 	tuple<const char *, const char *, size_t, uint32_t> data)
+ {
+     int options = 0;
+-    return ::setxattr( cyName.c_str(), data.get<0>(), data.get<1>(), 
++    return ::lsetxattr( cyName.c_str(), data.get<0>(), data.get<1>(), 
+ 	    data.get<2>(), data.get<3>(), options );
+ }
+ int encfs_setxattr( const char *path, const char *name,
+@@ -721,7 +721,7 @@ int encfs_setxattr( const char *path, const char *name,
+ int _do_setxattr(EncFS_Context *, const string &cyName, 
+ 	tuple<const char *, const char *, size_t, int> data)
+ {
+-    return ::setxattr( cyName.c_str(), data.get<0>(), data.get<1>(), 
++    return ::lsetxattr( cyName.c_str(), data.get<0>(), data.get<1>(), 
+ 	    data.get<2>(), data.get<3>() );
+ }
+ int encfs_setxattr( const char *path, const char *name,
+@@ -738,7 +738,7 @@ int _do_getxattr(EncFS_Context *, const string &cyName,
+ 	tuple<const char *, void *, size_t, uint32_t> data)
+ {
+     int options = 0;
+-    return ::getxattr( cyName.c_str(), data.get<0>(), 
++    return ::lgetxattr( cyName.c_str(), data.get<0>(), 
+ 	    data.get<1>(), data.get<2>(), data.get<3>(), options );
+ }
+ int encfs_getxattr( const char *path, const char *name,
+@@ -751,7 +751,7 @@ int encfs_getxattr( const char *path, const char *name,
+ int _do_getxattr(EncFS_Context *, const string &cyName,
+ 	tuple<const char *, void *, size_t> data)
+ {
+-    return ::getxattr( cyName.c_str(), data.get<0>(), 
++    return ::lgetxattr( cyName.c_str(), data.get<0>(), 
+ 	    data.get<1>(), data.get<2>());
+ }
+ int encfs_getxattr( const char *path, const char *name,
+@@ -768,10 +768,10 @@ int _do_listxattr(EncFS_Context *, const string &cyName,
+ {
+ #ifdef XATTR_ADD_OPT
+     int options = 0;
+-    int res = ::listxattr( cyName.c_str(), data.get<0>(), data.get<1>(),
++    int res = ::llistxattr( cyName.c_str(), data.get<0>(), data.get<1>(),
+             options );
+ #else
+-    int res = ::listxattr( cyName.c_str(), data.get<0>(), data.get<1>() );
++    int res = ::llistxattr( cyName.c_str(), data.get<0>(), data.get<1>() );
+ #endif
+     return (res == -1) ? -errno : res;
+ }
+@@ -786,9 +786,9 @@ int _do_removexattr(EncFS_Context *, const string &cyName, const char *name)
+ {
+ #ifdef XATTR_ADD_OPT
+     int options = 0;
+-    int res = ::removexattr( cyName.c_str(), name, options );
++    int res = ::lremovexattr( cyName.c_str(), name, options );
+ #else
+-    int res = ::removexattr( cyName.c_str(), name );
++    int res = ::lremovexattr( cyName.c_str(), name );
+ #endif
+     return (res == -1) ? -errno : res;
+ }

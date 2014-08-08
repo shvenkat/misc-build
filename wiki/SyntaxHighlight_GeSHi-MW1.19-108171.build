@@ -1,0 +1,9 @@
+# Download extension from http://www.mediawiki.org/wiki/Extension:SyntaxHighlight_GeSHi
+# Unpack into mediawiki/extensions
+# Load using require_once()
+# Update Mediawiki:Geshi.css to add a border
+# Apply fontSizePatch to correct small font size
+#   See https://gerrit.wikimedia.org/r/#/c/15781/
+#   Only patch 5 (the most recent) is needed, the others being deprecated patch versions
+#   See also https://bugzilla.wikimedia.org/show_bug.cgi?id=26204 for discussions but 
+#     do not use the proposed patch

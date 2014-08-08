@@ -1,0 +1,7 @@
+wget http://sphinxsearch.com/files/sphinx-2.0.4-release.tar.gz
+tar -xzf sphinx-2.0.4-release.tar.gz
+cd sphinx-2.0.4-release.tar.gz
+./configure --prefix=/usr/local --with-unixodbc --with-syslog
+make
+sudo make install
+# See http://www.mediawiki.org/wiki/Extension:SphinxSearch for the rest

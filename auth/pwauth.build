@@ -1,0 +1,12 @@
+wget http://pwauth.googlecode.com/files/pwauth-2.3.10.tar.gz
+tar -xzf pwauth-2.3.10.tar.gz
+cd pwauth-2.3.10
+patch -p1 < ../pwauth-2.3.10.patch
+make
+sudo cp pwauth /usr/local/libexec/pwauth
+sudo chown root:nginx /usr/local/libexec/pwauth
+sudo chmod 0750 /usr/local/libexec/pwauth
+sudo mkdir /var/lock/pwauth
+sudo chown root:nginx /var/lock/pwauth
+sudo chmod 0775 /var/lock/pwauth
+# Verify lock file creation on running pwauth

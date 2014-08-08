@@ -1,0 +1,111 @@
+diff -ru /home/shvenkat/install/wiki/mediawiki-extensions/pwauth-2.3.10/config.h ./config.h
+--- a/config.h	2011-10-05 06:01:12.000000000 -0700
++++ b/config.h	2012-05-23 10:31:20.000000000 -0700
+@@ -123,7 +123,7 @@
+ 
+ /* #define SHADOW_NONE		/**/
+ /* #define SHADOW_BSD		/* FreeBSD, NetBSD, OpenBSD, BSDI, OS X */
+-#define SHADOW_SUN		/* Linux, Solaris, IRIX */
++/* #define SHADOW_SUN		/* Linux, Solaris, IRIX */
+ /* #define SHADOW_JFH		/**/
+ /* #define SHADOW_MDW		/**/
+ /* #define SHADOW_AIX		/* AIX (see also AUTHENTICATE_AIX) */
+@@ -131,7 +131,7 @@
+ 
+    /* HIGH-LEVEL OPTIONS */
+ 
+-/* #define PAM			/* Linux PAM or OpenPAM */
++#define PAM			/* Linux PAM or OpenPAM */
+ /* #define PAM_OLD_OS_X		/* PAM on OS X version 10.5 or older */
+ /* #define PAM_SOLARIS		/* PAM on Solaris other than 2.6 */
+ /* #define PAM_SOLARIS_26	/* PAM on Solaris 2.6 */
+@@ -213,8 +213,8 @@
+  * uid numbers.
+  */
+ 
+-#define UNIX_LASTLOG		/**/
+-#define HAVE_LASTLOG_H		/**/
++/* #define UNIX_LASTLOG		/**/
++/* #define HAVE_LASTLOG_H		/**/
+ 
+ 
+ /* If NOLOGIN_FILE is defined to the full path name of a file, then the
+@@ -227,8 +227,8 @@
+  * right with PAM.
+  */
+ 
+-#define NOLOGIN_FILE "/etc/nologin"	/**/
+-#define MIN_NOLOGIN_UID 1		/**/
++/* #define NOLOGIN_FILE "/etc/nologin"	/**/
++/* #define MIN_NOLOGIN_UID 1		/**/
+ 
+ 
+ /* Defining CHECK_LOGIN_EXPIRATION and CHECK_PASSWORD_EXPIRATION causes
+@@ -240,8 +240,8 @@
+  * system to test on, I haven't bothered.
+  */
+ 
+-#define CHECK_LOGIN_EXPIRATION		/**/
+-#define CHECK_PASSWORD_EXPIRATION	/**/
++/* #define CHECK_LOGIN_EXPIRATION		/**/
++/* #define CHECK_PASSWORD_EXPIRATION	/**/
+ 
+ 
+ /* It is generally sensible to restrict what users can run pwauth.  Though
+@@ -278,7 +278,7 @@
+  * to change the uid list.
+  */
+ 
+-#define SERVER_UIDS 30		/* user "wwwrun" on the author's system */
++/* #define SERVER_UIDS 30		/* user "wwwrun" on the author's system */
+ 
+ 
+ /* If MIN_UNIX_UID is defined to an integer, logins with uid numbers less than
+@@ -290,7 +290,7 @@
+  * given value will be accepted).
+  */
+ 
+-#define MIN_UNIX_UID 500	/**/
++/* #define MIN_UNIX_UID 500	/**/
+ 
+ 
+ /* If IGNORE_CASE is defined, the login given is checked in two different
+@@ -299,7 +299,7 @@
+  * This ignores the case of the login name only, not the password.
+  */
+ 
+-/* #define IGNORE_CASE             /**/
++#define IGNORE_CASE             /**/
+ 
+ 
+ /* If DOMAIN_AWARE is enabled, then we we check login names to see if they
+@@ -308,7 +308,7 @@
+  * to login names formed like "domain\username".
+  */
+ 
+-/* #define DOMAIN_AWARE            /**/
++#define DOMAIN_AWARE            /**/
+ 
+ 
+ /* On failed authentications, pwauth will sleep for SLEEP_TIME seconds, using
+@@ -319,7 +319,7 @@
+  * SLEEP_LOCK.  SLEEP_TIME defaults to 2 seconds if not defined.
+  */
+ 
+-#define SLEEP_LOCK "/var/run/pwauth.lock"
++#define SLEEP_LOCK "/var/lock/pwauth/pwauth.lock"
+ 
+ 
+ /* If ENV_METHOD is defined, pwauth expects mod_auth_external to be configured
+diff -ru /home/shvenkat/install/wiki/mediawiki-extensions/pwauth-2.3.10/Makefile ./Makefile
+--- a/Makefile	2011-10-05 06:45:04.000000000 -0700
++++ b/Makefile	2012-05-23 09:57:09.000000000 -0700
+@@ -7,7 +7,7 @@
+ 
+ # Settings for author's system (Redhat 6.1)
+ CC=gcc
+-LIB= -lcrypt
++LIB=-lpam -ldl
+ LOCALFLAGS= -g 
+ 
+ # For PAM on Redhat Linux

@@ -1,0 +1,6 @@
+patch -p1 < ../encfs-1.7.4-fixSymlinkXattr.diff
+./configure --prefix=/scratch/shvenkat/opt/encfs-1.7.4-fixSymlinkXattr \
+    --with-boost-filesystem=boost_filesystem-mt \
+    --with-boost-serialization=boost_serialization-mt
+make
+make install

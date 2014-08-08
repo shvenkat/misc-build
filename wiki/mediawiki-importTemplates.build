@@ -1,0 +1,8 @@
+# Special:Export on the source wiki, full history, including templates, as XML file
+# Suspend backups, take pre-flight snapshot and/or backup, do not lock the wiki
+#   cd /var/web/mediawiki/maintenance
+#   sudo php importDump.php dump.xml
+#   sudo php rebuildrecentchanges.php
+#   sudo php update.php
+# Take post-flight snapshot and/or backup, compare and verify all OK
+# Resume backups

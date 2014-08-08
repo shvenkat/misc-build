@@ -1,0 +1,42 @@
+From 85ce4d4f6532ad6e771665ade73bac03cb5dc6e2 Mon Sep 17 00:00:00 2001
+From: saper <saper@saper.info>
+Date: Tue, 17 Jul 2012 12:35:18 +0200
+Subject: [PATCH] Make code section larger for some browsers
+
+Per comment:
+
+https://www.mediawiki.org/w/index.php?title=Extension_talk:SyntaxHighlight_GeSHi&diff=404556&oldid=402948
+
+	==1.0em/1.2em==
+
+	The plugin for v1.16, r62591 uses aforementioned notation.
+	Which is a rather obscure way to say "1em font-size and 1.2em
+	line-height, please". Sadly, this fails in both FF4 and Safari
+	5 (which seem to consider it a division). I recommend against
+	using it. ---  217.6.212.138 13:14, 20 May 2011 (UTC)
+
+This change removes this styling and allows more general
+MediaWiki <pre>/<code> style to kick in.
+
+Change-Id: Ie148e782db66fcdc10fb09d2a9cdc77fb16108cb
+---
+ SyntaxHighlight_GeSHi.class.php |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/SyntaxHighlight_GeSHi.class.php b/SyntaxHighlight_GeSHi.class.php
+index ca32463..34ab3f0 100644
+--- a/SyntaxHighlight_GeSHi.class.php
++++ b/SyntaxHighlight_GeSHi.class.php
+@@ -275,7 +275,9 @@ class SyntaxHighlight_GeSHi {
+ 		}
+ 		$geshi->set_encoding( 'UTF-8' );
+ 		$geshi->enable_classes();
++		$geshi->set_code_style( "line-height:1.2em; margin:0; padding:0; background:none; vertical-align:top;");
+ 		$geshi->set_overall_class( "source-$lang" );
++		$geshi->set_overall_style( "" );
+ 		$geshi->enable_keyword_links( false );
+ 		return $geshi;
+ 	}
+-- 
+1.7.8.4
+
